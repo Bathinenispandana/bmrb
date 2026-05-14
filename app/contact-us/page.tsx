@@ -1,9 +1,11 @@
 'use client';
 
 import PageHero from "@/components/PageHero";
-import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
-import { Phone, Mail, MapPin, Clock, Send } from "lucide-react";
+import Section from "@/components/ui/Section";
+import Input from "@/components/ui/Input";
+import TextArea from "@/components/ui/TextArea";
+import Button from "@/components/ui/Button";
+import { Phone, Mail, MapPin, Clock, Send, MessageCircle } from "lucide-react";
 import { useState } from "react";
 
 export default function ContactPage() {
@@ -15,10 +17,10 @@ export default function ContactPage() {
     subject: '',
     message: ''
   });
-
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -26,41 +28,44 @@ export default function ContactPage() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Here you would typically send the form data to your backend
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
+    setLoading(true);
     setTimeout(() => {
-      setFormData({ name: '', email: '', phone: '', company: '', subject: '', message: '' });
-      setSubmitted(false);
-    }, 3000);
+      console.log('Form submitted:', formData);
+      setSubmitted(true);
+      setLoading(false);
+      setTimeout(() => {
+        setFormData({ name: '', email: '', phone: '', company: '', subject: '', message: '' });
+        setSubmitted(false);
+      }, 3000);
+    }, 1000);
   };
 
   const contactInfo = [
     {
       icon: Phone,
       title: "Phone",
-      details: "+91-40-4017 5555",
+      details: "+91-98667 39499",
       description: "Call us during business hours"
     },
     {
       icon: Mail,
       title: "Email",
-      details: "info@bmrb.in",
+      details: "director@bmrb.in",
       description: "We'll respond within 24 hours"
     },
     {
       icon: MapPin,
-      title: "Office Address",
+      title: "Office",
       details: "Hyderabad, Telangana",
       description: "Corporate headquarters in India"
     },
     {
       icon: Clock,
-      title: "Business Hours",
-      details: "Mon - Fri: 9:00 AM - 6:00 PM",
-      description: "24/7 emergency support available"
+      title: "Hours",
+      details: "Mon - Fri: 9 AM - 6 PM",
+      description: "24/7 WhatsApp support"
     }
   ];
 
@@ -68,26 +73,33 @@ export default function ContactPage() {
     {
       city: "Hyderabad",
       address: "BMRB Research Pvt Ltd, Hyderabad, Telangana",
-      phone: "+91-40-4017 5555",
-      email: "hyderabad@bmrb.in"
+      phone: "+91-98667 39499",
+      whatsapp: "+91-98661 80977"
     },
     {
-      city: "Delhi",
-      address: "BMRB Research, New Delhi, India",
-      phone: "+91-11-XXXX XXXX",
-      email: "delhi@bmrb.in"
+      city: "Pan India",
+      address: "Available across all major cities",
+      phone: "+91-98667 39499",
+      whatsapp: "+91-98661 80977"
+    }
+  ];
+
+  const faqs = [
+    {
+      q: "What's the typical turnaround time for a research project?",
+      a: "Most projects are completed within 2-4 weeks depending on scope. Expedited timelines are available upon request."
     },
     {
-      city: "Mumbai",
-      address: "BMRB Research, Mumbai, Maharashtra",
-      phone: "+91-22-XXXX XXXX",
-      email: "mumbai@bmrb.in"
+      q: "Do you work with international clients?",
+      a: "Yes, we have experience working with multinational companies and offer services in multiple countries."
     },
     {
-      city: "Bangalore",
-      address: "BMRB Research, Bangalore, Karnataka",
-      phone: "+91-80-XXXX XXXX",
-      email: "bangalore@bmrb.in"
+      q: "How much does a typical research project cost?",
+      a: "Pricing varies based on project scope, sample size, and complexity. Contact us for a customized quote."
+    },
+    {
+      q: "What research methodologies do you use?",
+      a: "We employ both quantitative (surveys, polling) and qualitative (focus groups, interviews) methodologies."
     }
   ];
 
@@ -95,255 +107,235 @@ export default function ContactPage() {
     <main className="min-h-screen overflow-x-hidden">
       <PageHero 
         title="Contact Us" 
-        description="Get in touch with our team. We're here to help with your research needs."
+        description="Let's discuss your market research needs. We're here to help."
         backgroundImage="/images/home-bg.avif"
       />
 
-      {/* Contact Information Cards */}
-      <section className="py-16 md:py-24 px-4 md:px-8 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-6 mb-12">
-            {contactInfo.map((info, idx) => {
-              const Icon = info.icon;
-              return (
-                <div 
-                  key={idx}
-                  className="p-6 rounded-lg border-2 border-gray-100 hover:shadow-lg transition-shadow text-center"
-                >
-                  <div className="flex justify-center mb-4">
-                    <Icon size={32} style={{ color: "#0367a6" }} />
+      {/* Quick Contact Cards */}
+      <Section lightBg className="relative">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {contactInfo.map((info, idx) => {
+            const Icon = info.icon;
+            return (
+              <div 
+                key={idx}
+                className="p-6 rounded-xl border border-neutral-200 bg-white card-hover text-center"
+              >
+                <div className="flex justify-center mb-4">
+                  <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center">
+                    <Icon className="w-6 h-6 text-accent" />
                   </div>
-                  <h3 className="text-lg font-bold mb-2" style={{ color: "#0367a6" }}>
-                    {info.title}
-                  </h3>
-                  <p className="font-semibold text-gray-800 mb-1">{info.details}</p>
-                  <p className="text-sm text-gray-600">{info.description}</p>
                 </div>
-              );
-            })}
-          </div>
+                <h3 className="text-lg font-bold text-foreground mb-1">
+                  {info.title}
+                </h3>
+                <p className="font-semibold text-accent text-sm mb-1">{info.details}</p>
+                <p className="text-xs text-foreground-secondary">{info.description}</p>
+              </div>
+            );
+          })}
         </div>
-      </section>
+      </Section>
 
       {/* Contact Form & Info */}
-      <section className="py-16 md:py-24 px-4 md:px-8 bg-gray-50">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12">
-            {/* Contact Form */}
-            <div>
-              <h2 className="text-3xl font-bold mb-6" style={{ color: "#0367a6" }}>
-                Send us a Message
-              </h2>
+      <Section className="relative">
+        <div className="grid lg:grid-cols-2 gap-12">
+          {/* Contact Form */}
+          <div className="animate-slide-in-left">
+            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-foreground">
+              Send us a Message
+            </h2>
 
-              {submitted ? (
-                <div className="bg-green-50 border-2 border-green-200 p-8 rounded-lg text-center">
-                  <div className="text-5xl mb-4">✓</div>
-                  <h3 className="text-2xl font-bold text-green-700 mb-2">Thank You!</h3>
-                  <p className="text-green-700">We've received your message and will get back to you soon.</p>
+            {submitted ? (
+              <div className="bg-green-50 border-2 border-green-200 p-8 md:p-12 rounded-xl text-center animate-scale-in">
+                <div className="w-16 h-16 bg-green-200 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-3xl">✓</span>
                 </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-semibold mb-2 text-gray-700">Full Name</label>
-                    <input 
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      placeholder="Your full name"
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-                    />
-                  </div>
+                <h3 className="text-2xl font-bold text-green-700 mb-2">Thank You!</h3>
+                <p className="text-green-700">We've received your message and will get back to you soon.</p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <Input
+                  label="Full Name"
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="Your full name"
+                  required
+                />
 
-                  <div>
-                    <label className="block text-sm font-semibold mb-2 text-gray-700">Email</label>
-                    <input 
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      placeholder="your@email.com"
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-                    />
-                  </div>
+                <Input
+                  label="Email"
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="your@email.com"
+                  required
+                />
 
-                  <div>
-                    <label className="block text-sm font-semibold mb-2 text-gray-700">Phone Number</label>
-                    <input 
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      placeholder="+91-XXXXXXXXXX"
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-                    />
-                  </div>
+                <Input
+                  label="Phone Number"
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder="+91-XXXXXXXXXX"
+                />
 
-                  <div>
-                    <label className="block text-sm font-semibold mb-2 text-gray-700">Company</label>
-                    <input 
-                      type="text"
-                      name="company"
-                      value={formData.company}
-                      onChange={handleChange}
-                      placeholder="Your company name"
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-                    />
-                  </div>
+                <Input
+                  label="Company"
+                  type="text"
+                  name="company"
+                  value={formData.company}
+                  onChange={handleChange}
+                  placeholder="Your company name"
+                />
 
-                  <div>
-                    <label className="block text-sm font-semibold mb-2 text-gray-700">Subject</label>
-                    <input 
-                      type="text"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      required
-                      placeholder="Research project inquiry"
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-                    />
-                  </div>
+                <Input
+                  label="Subject"
+                  type="text"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  placeholder="Research project inquiry"
+                  required
+                />
 
-                  <div>
-                    <label className="block text-sm font-semibold mb-2 text-gray-700">Message</label>
-                    <textarea 
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                      placeholder="Tell us about your research needs..."
-                      rows="6"
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 resize-none"
-                    ></textarea>
-                  </div>
+                <TextArea
+                  label="Message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder="Tell us about your research needs..."
+                  required
+                />
 
-                  <button 
-                    type="submit"
-                    className="w-full py-3 rounded-lg font-bold text-white text-lg transition-colors flex items-center justify-center gap-2"
-                    style={{ backgroundColor: "#0367a6" }}
-                    onMouseEnter={(e) => e.target.style.backgroundColor = "#d9415d"}
-                    onMouseLeave={(e) => e.target.style.backgroundColor = "#0367a6"}
-                  >
-                    <Send size={20} />
-                    Send Message
-                  </button>
-                </form>
-              )}
-            </div>
+                <Button 
+                  type="submit"
+                  variant="primary"
+                  size="lg"
+                  loading={loading}
+                  className="w-full justify-center group"
+                >
+                  <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  Send Message
+                </Button>
+              </form>
+            )}
+          </div>
 
-            {/* Contact Information */}
-            <div>
-              <h2 className="text-3xl font-bold mb-6" style={{ color: "#0367a6" }}>
-                Our Offices
-              </h2>
+          {/* Contact Information */}
+          <div className="animate-slide-in-right">
+            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-foreground">
+              Get in Touch
+            </h2>
 
-              <div className="space-y-6">
-                {offices.map((office, idx) => (
-                  <div key={idx} className="bg-white p-6 rounded-lg shadow-lg">
-                    <h3 className="text-xl font-bold mb-3" style={{ color: "#d9415d" }}>
-                      {office.city}
-                    </h3>
-                    <div className="space-y-2 text-gray-700">
-                      <div className="flex items-start gap-2">
-                        <MapPin size={20} style={{ color: "#0367a6" }} className="flex-shrink-0 mt-1" />
-                        <p>{office.address}</p>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Phone size={20} style={{ color: "#0367a6" }} className="flex-shrink-0" />
-                        <a href={`tel:${office.phone}`} className="hover:underline">{office.phone}</a>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Mail size={20} style={{ color: "#0367a6" }} className="flex-shrink-0" />
-                        <a href={`mailto:${office.email}`} className="hover:underline">{office.email}</a>
-                      </div>
+            <div className="space-y-6 mb-8">
+              {offices.map((office, idx) => (
+                <div key={idx} className="bg-white border border-neutral-200 p-6 rounded-xl card-hover">
+                  <h3 className="text-xl font-bold mb-4 text-accent">
+                    {office.city}
+                  </h3>
+                  <div className="space-y-3 text-foreground-secondary">
+                    <div className="flex items-start gap-3">
+                      <MapPin className="w-5 h-5 text-accent flex-shrink-0 mt-1" />
+                      <p className="text-sm">{office.address}</p>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <Phone className="w-5 h-5 text-accent flex-shrink-0" />
+                      <a href={`tel:${office.phone}`} className="text-sm hover:text-accent transition-colors underline-accent">
+                        {office.phone}
+                      </a>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <MessageCircle className="w-5 h-5 text-accent flex-shrink-0" />
+                      <a href={`https://wa.me/${office.whatsapp.replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer" className="text-sm hover:text-accent transition-colors underline-accent">
+                        WhatsApp: {office.whatsapp}
+                      </a>
                     </div>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
+            </div>
 
-              <div className="mt-8 p-6 rounded-lg" style={{ backgroundColor: "#f0f8ff" }}>
-                <h3 className="font-bold mb-3" style={{ color: "#0367a6" }}>Need Quick Support?</h3>
-                <p className="text-gray-700 mb-4">
-                  Click the WhatsApp button in the corner to chat with us directly. We're available 24/7!
-                </p>
-                <button 
-                  className="px-6 py-2 rounded-lg font-semibold text-white transition-colors"
-                  style={{ backgroundColor: "#25D366" }}
-                >
-                  Chat on WhatsApp
-                </button>
+            {/* Quick Support Box */}
+            <div className="p-6 md:p-8 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 border border-accent/20">
+              <div className="flex items-start gap-4">
+                <MessageCircle className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="font-bold text-foreground mb-2">Need Quick Support?</h3>
+                  <p className="text-foreground-secondary text-sm mb-4">
+                    Click the WhatsApp button in the corner to chat with us directly. We're available 24/7!
+                  </p>
+                  <a
+                    href="https://wa.me/919866180977"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-accent font-semibold hover:underline"
+                  >
+                    Chat on WhatsApp
+                    <MessageCircle className="w-4 h-4" />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </Section>
 
       {/* FAQ Section */}
-      <section className="py-16 md:py-24 px-4 md:px-8 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-4" style={{ color: "#0367a6" }}>
-            Frequently Asked Questions
-          </h2>
-          <p className="text-center text-gray-600 mb-12 text-lg">
-            Quick answers to common questions about our services
-          </p>
-
+      <Section
+        title="Frequently Asked Questions"
+        subtitle="FAQ"
+        description="Quick answers to common questions about our services"
+        lightBg
+      >
+        <div className="max-w-3xl mx-auto">
           <div className="space-y-4">
-            {[
-              {
-                q: "What's the typical turnaround time for a research project?",
-                a: "Most projects are completed within 2-4 weeks depending on scope. Expedited timelines are available upon request."
-              },
-              {
-                q: "Do you work with international clients?",
-                a: "Yes, we have experience working with multinational companies and offer services in multiple countries."
-              },
-              {
-                q: "How much does a typical research project cost?",
-                a: "Pricing varies based on project scope, sample size, and complexity. Contact us for a customized quote."
-              },
-              {
-                q: "What research methodologies do you use?",
-                a: "We employ both quantitative (surveys, polling) and qualitative (focus groups, interviews) methodologies based on your needs."
-              }
-            ].map((item, idx) => (
-              <div key={idx} className="border-2 border-gray-200 rounded-lg p-6">
-                <h3 className="text-lg font-bold mb-2" style={{ color: "#0367a6" }}>
-                  {item.q}
-                </h3>
-                <p className="text-gray-700">{item.a}</p>
-              </div>
+            {faqs.map((item, idx) => (
+              <details 
+                key={idx} 
+                className="group border border-neutral-200 rounded-xl overflow-hidden bg-white hover:border-accent/30 transition-colors"
+              >
+                <summary className="flex items-center justify-between p-6 cursor-pointer hover:bg-neutral-50 transition-colors">
+                  <h3 className="text-lg font-semibold text-foreground pr-4">
+                    {item.q}
+                  </h3>
+                  <span className="text-accent group-open:rotate-180 transition-transform flex-shrink-0">
+                    ▼
+                  </span>
+                </summary>
+                <div className="px-6 pb-6 pt-2 text-foreground-secondary border-t border-neutral-100">
+                  {item.a}
+                </div>
+              </details>
             ))}
           </div>
         </div>
-      </section>
+      </Section>
 
       {/* Final CTA */}
-      <section 
-        className="py-16 md:py-24 px-4 md:px-8"
-        style={{ background: "linear-gradient(135deg, #0367a6 0%, #0378a6 100%)" }}
-      >
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-4 text-white">
+      <Section className="bg-gradient-to-br from-primary to-primary-light">
+        <div className="text-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white text-balance">
             Ready to Start Your Research Project?
           </h2>
-          <p className="text-lg text-white mb-8">
-            Contact us today and let's discuss how we can help your business grow
+          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
+            Contact us today and let's discuss how we can help your business grow and thrive in today's market.
           </p>
-          <button 
-            className="px-8 py-4 rounded-lg font-bold text-lg transition-transform hover:scale-105"
-            style={{ backgroundColor: "#d9415d", color: "white" }}
-            onClick={() => window.scrollTo(0, 0)}
+          <Button
+            variant="primary"
+            size="lg"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="bg-white text-primary hover:bg-neutral-100 border-white"
           >
             Back to Top
-          </button>
+          </Button>
         </div>
-      </section>
-
-      <Footer />
-      <WhatsAppButton />
+      </Section>
     </main>
   );
 }

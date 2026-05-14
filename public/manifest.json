@@ -1,0 +1,64 @@
+{
+  "name": "Brand Market Research Bureau",
+  "short_name": "BMRB",
+  "description": "Market research solutions and business consulting",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#0a1628",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/favicon-b.ico",
+      "sizes": "32x32",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/images/apple-touch-icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/apple-touch-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/images/logo.avif",
+      "sizes": "540x720",
+      "type": "image/avif"
+    }
+  ],
+  "categories": ["business", "productivity"],
+  "shortcuts": [
+    {
+      "name": "Contact Us",
+      "short_name": "Contact",
+      "description": "Get in touch with BMRB",
+      "url": "/contact",
+      "icons": [
+        {
+          "src": "/favicon-b.ico",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Services",
+      "short_name": "Services",
+      "description": "Explore our research services",
+      "url": "/services",
+      "icons": [
+        {
+          "src": "/favicon-b.ico",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}

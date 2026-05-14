@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
+import Button from "@/components/ui/Button";
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -49,22 +50,22 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-[#0a1628]/95 backdrop-blur-md shadow-2xl py-3"
-          : "bg-gradient-to-b from-[#0a1628]/80 to-transparent py-5"
+          ? "bg-primary/95 backdrop-blur-md shadow-2xl py-3 border-b border-white/10"
+          : "bg-gradient-to-b from-primary/80 to-transparent py-4 md:py-5"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="section-container">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center group">
+          <Link href="/" className="flex items-center group flex-shrink-0">
             <Image
               src="/images/logo.avif"
               alt="Brand Market Research Bureau"
               width={180}
               height={50}
-              className="h-10 md:h-12 w-auto transition-transform duration-300 group-hover:scale-105"
+              className="h-8 md:h-10 w-auto transition-transform duration-300 group-hover:scale-105"
               priority
             />
           </Link>
@@ -74,15 +75,15 @@ export default function Header() {
             {navItems.map((item) => (
               <div
                 key={item.name}
-                className="relative group"
+                className="relative"
                 onMouseEnter={() => setActiveDropdown(item.name)}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
                 <Link
                   href={item.href}
-                  className={`flex items-center gap-1 px-4 py-2 font-medium text-sm tracking-wide transition-all duration-300 rounded-lg hover:bg-white/10 ${
+                  className={`flex items-center gap-1.5 px-3.5 py-2 font-medium text-sm tracking-wide transition-all duration-300 rounded-lg underline-accent ${
                     isActive(item.href)
-                      ? "text-white bg-white/10"
+                      ? "text-white"
                       : "text-white/90 hover:text-white"
                   }`}
                 >
@@ -94,16 +95,15 @@ export default function Header() {
 
                 {/* Dropdown */}
                 {item.submenu && activeDropdown === item.name && (
-                  <div className="absolute top-full left-0 pt-2 min-w-[260px]">
-                    <div className="bg-white rounded-xl shadow-2xl py-3 border border-gray-100 overflow-hidden">
-                      <div className="absolute top-0 left-6 w-3 h-3 bg-white transform rotate-45 -translate-y-1.5 border-l border-t border-gray-100"></div>
-                      {item.submenu.map((subitem) => (
+                  <div className="absolute top-full left-0 pt-2 min-w-[280px] animate-slide-down">
+                    <div className="bg-white rounded-xl shadow-2xl py-2 border border-neutral-200 overflow-hidden">
+                      {item.submenu.map((subitem, idx) => (
                         <Link
                           key={subitem.name}
                           href={subitem.href}
-                          className="flex items-center px-5 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-[#0367a6]/10 hover:to-transparent hover:text-[#0367a6] text-sm transition-all duration-200 border-l-2 border-transparent hover:border-[#0367a6]"
+                          className={`flex items-center px-5 py-3 text-foreground hover:bg-neutral-50 hover:text-primary-light text-sm transition-all duration-200 border-l-4 ${idx === 0 ? 'border-l-accent' : 'border-l-transparent hover:border-l-accent'}`}
                         >
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#d9415d] mr-3"></span>
+                          <span className="w-2 h-2 rounded-full bg-accent mr-3" />
                           {subitem.name}
                         </Link>
                       ))}
@@ -114,21 +114,21 @@ export default function Header() {
             ))}
 
             {/* CTA Button */}
-            <Link
-              href="/contact"
-              className="ml-4 bg-[#d9415d] hover:bg-[#d92938] text-white font-semibold px-6 py-2.5 rounded-full text-sm transition-all duration-300 hover:shadow-lg hover:shadow-[#d9415d]/40 hover:-translate-y-0.5"
-            >
-              Get Quote
+            <Link href="/contact" className="ml-6">
+              <Button variant="primary" size="md" className="group">
+                Get Quote
+                <ArrowRight className="w-4 h-4 inline-block ml-2 group-hover:translate-x-1 transition-transform" />
+              </Button>
             </Link>
           </nav>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden flex items-center gap-2 text-white p-2"
+            className="lg:hidden flex items-center gap-2 text-white p-2 -mr-2"
             aria-label="Toggle menu"
           >
-            <span className="text-sm font-semibold tracking-wide">MENU</span>
+            <span className="text-xs font-bold tracking-widest uppercase">Menu</span>
             <div className="relative w-6 h-6">
               <Menu className={`w-6 h-6 absolute transition-all duration-300 ${isOpen ? 'opacity-0 rotate-90' : 'opacity-100 rotate-0'}`} />
               <X className={`w-6 h-6 absolute transition-all duration-300 ${isOpen ? 'opacity-100 rotate-0' : 'opacity-0 -rotate-90'}`} />
@@ -138,15 +138,15 @@ export default function Header() {
       </div>
 
       {/* Mobile Navigation */}
-      <div className={`lg:hidden overflow-hidden transition-all duration-500 ${isOpen ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'}`}>
-        <nav className="bg-[#0a1628] border-t border-white/10 mt-4">
-          <div className="max-w-7xl mx-auto px-4 py-4">
-            {navItems.map((item) => (
-              <div key={item.name} className="border-b border-white/10 last:border-0">
+      <div className={`lg:hidden overflow-hidden transition-all duration-500 ${isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}`}>
+        <nav className="bg-primary border-t border-white/10 mt-3">
+          <div className="section-container py-4">
+            {navItems.map((item, idx) => (
+              <div key={item.name} className={`${idx !== navItems.length - 1 ? 'border-b border-white/10' : ''}`}>
                 <Link
                   href={item.href}
-                  className={`flex items-center justify-between py-4 font-medium ${
-                    isActive(item.href) ? "text-white" : "text-white/80"
+                  className={`flex items-center justify-between py-3.5 font-medium transition-colors ${
+                    isActive(item.href) ? "text-white" : "text-white/80 hover:text-white"
                   }`}
                 >
                   {item.name}
@@ -158,20 +158,19 @@ export default function Header() {
                       <Link
                         key={subitem.name}
                         href={subitem.href}
-                        className="block py-2 text-white/60 text-sm hover:text-white transition-colors"
+                        className="block py-2.5 text-white/70 text-sm hover:text-white transition-colors"
                       >
-                        {subitem.name}
+                        • {subitem.name}
                       </Link>
                     ))}
                   </div>
                 )}
               </div>
             ))}
-            <Link
-              href="/contact"
-              className="block mt-4 bg-[#d9415d] text-white font-semibold px-6 py-3.5 rounded-full text-center text-sm tracking-wide"
-            >
-              Get Quote
+            <Link href="/contact" className="block mt-5">
+              <Button variant="primary" size="md" className="w-full justify-center">
+                Get Quote
+              </Button>
             </Link>
           </div>
         </nav>
