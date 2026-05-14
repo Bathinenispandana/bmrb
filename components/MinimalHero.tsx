@@ -5,15 +5,15 @@ export default function MinimalHero() {
         <div className="text-center space-y-8 md:space-y-12">
           <div className="space-y-6">
             <p className="text-sm tracking-widest text-foreground-secondary uppercase">
-              Market Research Excellence
+              Our Expertise
             </p>
             
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-foreground tracking-tight">
-              Comprehensive market research for informed business decisions
+              Market Research Driven by Experienced Professionals
             </h1>
 
             <p className="text-lg md:text-xl text-foreground-secondary max-w-2xl mx-auto leading-relaxed">
-              Transform your business with data-driven insights. We provide in-depth market analysis, consumer research, and strategic intelligence tailored to your industry.
+              We provide high-quality data reports collected and analyzed by our certified professionals. Our commitment is to accuracy, timely deliverables, and dedicated service, ensuring 100% confidentiality and value for every client.
             </p>
           </div>
 
@@ -22,13 +22,13 @@ export default function MinimalHero() {
               href="#portfolio"
               className="px-8 py-4 bg-accent text-white font-semibold text-center hover:bg-accent-dark transition-all duration-300 hover:-translate-y-1"
             >
-              View Our Work
+              View Our Projects
             </a>
             <a 
-              href="/contact-us"
+              href="/services"
               className="px-8 py-4 border-2 border-foreground text-foreground font-semibold text-center hover:bg-foreground hover:text-background transition-all duration-300"
             >
-              Get Started
+              Learn More About Us
             </a>
           </div>
 
@@ -40,11 +40,11 @@ export default function MinimalHero() {
             </div>
             <div className="text-center space-y-2">
               <div className="text-3xl md:text-4xl font-bold text-foreground">500+</div>
-              <p className="text-sm text-foreground-secondary">Projects</p>
+              <p className="text-sm text-foreground-secondary">Projects Completed</p>
             </div>
             <div className="text-center space-y-2">
               <div className="text-3xl md:text-4xl font-bold text-foreground">100+</div>
-              <p className="text-sm text-foreground-secondary">Researchers</p>
+              <p className="text-sm text-foreground-secondary">Research Experts</p>
             </div>
           </div>
         </div>

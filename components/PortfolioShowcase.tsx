@@ -8,51 +8,57 @@ import { ArrowRight } from 'lucide-react';
 const projects = [
   {
     id: 1,
-    title: 'Retail Brand Market Penetration',
-    category: 'Brand Research',
-    description: 'Comprehensive market study for nationwide retail expansion strategy',
-    tags: ['Consumer Research', 'Market Analysis', 'Strategy'],
+    title: 'Hyderabad Metro Rail Study',
+    category: 'Government Project',
+    description: 'Comprehensive passenger satisfaction and transport fare analysis study for metro rail infrastructure',
+    tags: ['Transport', 'Fare Analysis', 'Passenger Feedback'],
     image: '/images/project-1.avif',
+    clientType: 'Government Institution'
   },
   {
     id: 2,
-    title: 'FMCG Product Launch Study',
-    category: 'Product Research',
-    description: 'Pre-launch consumer acceptance testing and positioning analysis',
-    tags: ['Product Testing', 'Consumer Insights', 'Positioning'],
+    title: 'Hyundai Motors Analysis',
+    category: 'Automotive',
+    description: 'In-depth dealer and customer satisfaction study measuring key performance metrics in automotive sector',
+    tags: ['CSAT Research', 'Automotive', 'Performance Metrics'],
     image: '/images/project-2.avif',
+    clientType: 'Global Automotive Leader'
   },
   {
     id: 3,
-    title: 'Corporate Customer Satisfaction',
-    category: 'B2B Research',
-    description: 'In-depth B2B satisfaction study and competitive benchmarking',
-    tags: ['B2B Research', 'Customer Experience', 'Benchmarking'],
+    title: 'Telangana Police Department Projects',
+    category: 'Public Sector',
+    description: 'Multiple assessment studies including traffic e-challan system, safety applications, and performance evaluation',
+    tags: ['Safety Assessment', 'Performance Research', 'Public Sector'],
     image: '/images/project-3.avif',
+    clientType: 'State Government Institution'
   },
   {
     id: 4,
-    title: 'Election Opinion Poll',
+    title: 'Election & Opinion Poll Surveys',
     category: 'Political Research',
-    description: 'Large-scale political opinion tracking and demographic analysis',
-    tags: ['Political Research', 'Polling', 'Data Analytics'],
+    description: 'Large-scale election surveys and political opinion polling for constituency analysis and insights',
+    tags: ['Electoral Research', 'Opinion Polling', 'Constituency Analysis'],
     image: '/images/project-4.avif',
+    clientType: 'Political Organizations'
   },
   {
     id: 5,
-    title: 'Packaging Design Optimization',
-    category: 'Product Design',
-    description: 'Consumer preference testing for packaging redesign',
-    tags: ['Design Testing', 'Consumer Insights', 'Optimization'],
+    title: 'Startup Market Research (Swiggy & Others)',
+    category: 'E-commerce & Startups',
+    description: 'Comprehensive market research for 450+ startups including market leaders to support growth strategies',
+    tags: ['Startup Ecosystem', 'Brand Research', 'E-Commerce'],
     image: '/images/project-5.avif',
+    clientType: 'Startup Ecosystem'
   },
   {
     id: 6,
-    title: 'Digital Transformation Assessment',
-    category: 'Strategic Research',
-    description: 'Market readiness analysis for digital innovation strategy',
-    tags: ['Digital Research', 'Innovation', 'Strategy'],
+    title: 'Reliance Broadcasting Study',
+    category: 'Media & Entertainment',
+    description: 'Listener satisfaction study for radio broadcasting to enhance user experience and content strategy',
+    tags: ['Media Research', 'Content Strategy', 'Audience Insights'],
     image: '/images/project-6.avif',
+    clientType: 'Media & Entertainment'
   },
 ];
 
@@ -87,13 +93,13 @@ export default function PortfolioShowcase() {
         {/* Section Header */}
         <div className="max-w-2xl mb-16 md:mb-24">
           <p className="text-sm tracking-widest text-foreground-secondary uppercase mb-4">
-            Our Work
+            Our Projects & Clients
           </p>
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Featured Projects
+            Showcasing Our Work With Government & Industry Leaders
           </h2>
           <p className="text-lg text-foreground-secondary leading-relaxed">
-            Explore our latest market research studies and strategic insights for leading brands and organizations.
+            We've successfully delivered comprehensive research solutions across multiple sectors, from government institutions to leading private enterprises and startup ecosystems.
           </p>
         </div>
 

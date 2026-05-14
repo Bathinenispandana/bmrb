@@ -7,37 +7,37 @@ import { Star } from 'lucide-react';
 const testimonials = [
   {
     id: 1,
-    quote: 'BMRB\'s comprehensive market research was crucial for our market entry strategy. Their insights directly contributed to a 40% increase in market share.',
-    author: 'Rajesh Kumar',
-    role: 'CEO, Consumer Goods Company',
-    company: 'Leading FMCG Brand',
+    quote: 'Conducted a comprehensive study on dealer and customer satisfaction to measure and manage key performance metrics in the automotive sector.',
+    author: 'Hyundai Motors',
+    role: 'Global Automotive Leader',
+    company: 'Automotive Industry',
     rating: 5,
     image: '/images/testimonial-1.avif',
   },
   {
     id: 2,
-    quote: 'The customer satisfaction studies conducted by BMRB revealed key pain points we had overlooked. Implementation of their recommendations improved our NPS by 25 points.',
-    author: 'Priya Sharma',
-    role: 'VP Operations',
-    company: 'Retail Chain',
+    quote: 'Performed multiple assessment studies, including analyses of the Traffic E-challan system, She Team functioning, and the Hawkeye safety application.',
+    author: 'Telangana Police Department',
+    role: 'State Government Institution',
+    company: 'Public Sector',
     rating: 5,
     image: '/images/testimonial-2.avif',
   },
   {
     id: 3,
-    quote: 'BMRB\'s B2B research methodology is unparalleled. Their competitive intelligence helped us position our product effectively in a crowded marketplace.',
-    author: 'Amit Patel',
-    role: 'Managing Director',
-    company: 'Technology Solutions',
+    quote: 'Executed a listener satisfaction study for our radio channel, gathering valuable feedback to enhance the broadcasting experience and content strategy.',
+    author: 'Reliance Broadcasting (92.7 FM)',
+    role: 'Media & Entertainment',
+    company: 'Broadcasting Network',
     rating: 5,
     image: '/images/testimonial-3.avif',
   },
   {
     id: 4,
-    quote: 'Working with BMRB for our product launch was transformational. Their consumer insights and positioning recommendations were spot-on.',
-    author: 'Neha Gupta',
-    role: 'Product Lead',
-    company: 'Health & Wellness Brand',
+    quote: 'Provided crucial market research for our startup and 450+ other startups including industry leaders, supporting new business launches and growth strategies.',
+    author: 'Swiggy & Startup Ecosystem',
+    role: 'E-commerce & Startup Leaders',
+    company: 'Technology & Startup Sector',
     rating: 5,
     image: '/images/testimonial-4.avif',
   },
@@ -74,13 +74,13 @@ export default function Testimonials() {
         {/* Section Header */}
         <div className="max-w-2xl mb-16 md:mb-24">
           <p className="text-sm tracking-widest text-foreground-secondary uppercase mb-4">
-            Client Success
+            Our Clients & Projects
           </p>
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            What Our Clients Say
+            Showcasing Our Work With Government & Industry Leaders
           </h2>
           <p className="text-lg text-foreground-secondary leading-relaxed">
-            Trusted by leading brands and organizations across industries for delivering actionable insights.
+            Trusted by leading organizations across government, automotive, media, startups, and public sectors for delivering comprehensive research solutions.
           </p>
         </div>
 
@@ -139,10 +139,16 @@ export default function Testimonials() {
         {/* Client Logos Section */}
         <div className="mt-20 md:mt-28 pt-16 border-t border-neutral-200">
           <p className="text-sm tracking-widest text-foreground-secondary uppercase mb-10 text-center">
-            Trusted by Leading Organizations
+            Partnering With Industry Leaders
           </p>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-12 items-center justify-items-center">
-            {['Fortune 500 Company', 'Leading Retail Brand', 'Tech Innovator', 'FMCG Leader', 'Digital Pioneer'].map((company, idx) => (
+            {[
+              'Hyundai Motors',
+              'Telangana Police Dept.',
+              'Reliance Broadcasting',
+              'Metro Rail Authority',
+              '450+ Startups & Founders'
+            ].map((company, idx) => (
               <div
                 key={idx}
                 className="text-center w-full py-4 px-6 border border-neutral-200 rounded hover:border-accent transition-colors cursor-pointer"
